@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
-    "dist": "yarn compile && electron-builder",
+    "dist": "yarn compile && electron-builder build -mwl",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
     "rebuild": "electron-builder install-app-deps"
   },
@@ -21,6 +21,20 @@
   },
   "resolutions": {
     "webpack-sources": "1.0.1"
+  },
+  "build": {
+    "appId": "com.paperpile.plugin",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    }
   },
   "electronWebpack": {
     "title": "Electron Realm POC"
