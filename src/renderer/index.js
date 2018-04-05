@@ -1,9 +1,11 @@
 // Initial welcome page. Delete the following line to remove it.
 'use strict';
 import { remote } from 'electron';
-const realmPromise = remote.getGlobal('realmPromise');
-let realm = null;
-realmPromise.then((interProcessRealm) => realm = interProcessRealm);
+import * as Realm from 'realm'
+
+const getRealm = Realm.open({
+    path: `${remote.app.getPath('userData')}/realm/dog.realm`,
+});
 
 const styles = document.createElement('style');
 styles.innerText = `@import url(https://unpkg.com/spectre.css/dist/spectre.min.css);.empty{display:flex;flex-direction:column;justify-content:center;height:100vh;position:relative}.footer{bottom:0;font-size:13px;left:50%;opacity:.9;position:absolute;transform:translateX(-50%);width:100%}`;
@@ -26,7 +28,10 @@ function init() {
                 require('electron').shell.openExternal(b)
             },
             log() {
-                console.log(realm);
+                getRealm.then((realm) => {
+                    let dogs = realm.objects('Dog'); // retrieves all Dogs from the Realm
+                    console.log(dogs);
+                });
             }
         },
         template: `

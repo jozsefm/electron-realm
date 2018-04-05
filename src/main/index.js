@@ -5,22 +5,35 @@ import * as path from 'path'
 import { format as formatUrl } from 'url'
 import * as Realm from 'realm'
 
-let realmResolver = null;
-global.realmPromise = new Promise((resolve => realmResolver = resolve));
-
-const TestPersonSchema = {
-    name: 'Person',
+const DogSchema = {
+    name: 'Dog',
     properties: {
         name: 'string',
-        age: 'int'
+        age: 'int',
     }
 };
 
 Realm.open({
-        schema: [TestPersonSchema],
-        path: `${app.getPath('userData')}/realm/default.realm`,
-    })
-    .then(realm => realmResolver(realm));
+    schema: [DogSchema],
+    path: `${app.getPath('userData')}/realm/dog.realm`,
+})
+.then((realm) => {
+    let dogs = realm.objects('Dog'); // retrieves all Dogs from the Realm
+    if(dogs.length === 0) {
+        try {
+            realm.write(() => {
+                realm.create('Dog', {
+                    name: 'Bro',
+                    age: 10
+                });
+            });
+        } catch (e) {
+            console.log("Error on creation");
+        }
+        console.log('Saved Bro');
+    }
+});
+
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
