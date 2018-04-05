@@ -15,7 +15,7 @@ const DogSchema = {
 
 Realm.open({
     schema: [DogSchema],
-    path: `${app.getPath('userData')}/realm/dog.realm`,
+    path: `${app.getPath('userData')}/dog.realm`,
 })
 .then((realm) => {
     let dogs = realm.objects('Dog'); // retrieves all Dogs from the Realm

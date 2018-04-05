@@ -4,7 +4,7 @@ import { remote } from 'electron';
 import * as Realm from 'realm'
 
 const getRealm = Realm.open({
-    path: `${remote.app.getPath('userData')}/realm/dog.realm`,
+    path: `${remote.app.getPath('userData')}/dog.realm`,
 });
 
 const styles = document.createElement('style');
