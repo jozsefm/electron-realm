@@ -11,8 +11,7 @@
   "dependencies": {
     "react": "^16.2.0",
     "react-native": "^0.54.4",
-    "realm": "^2.3.3",
-    "source-map-support": "^0.5.4"
+    "realm": "^2.3.3"
   },
   "devDependencies": {
     "electron": "1.8.4",
