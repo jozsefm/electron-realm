@@ -1,5 +1,6 @@
 const {app, BrowserWindow} = require('electron')
   const path = require('path')
+  const fs = require('fs')
   const url = require('url')
 const Realm = require('realm')
 
@@ -10,10 +11,11 @@ const DogSchema = {
         age: 'int',
     }
 };
+fs.mkdirSync(`${path.resolve('.')}/realm`);
 
 Realm.open({
     schema: [DogSchema],
-    path: `${app.getPath('userData')}/dog.realm`,
+    path: `${path.resolve('./realm')}/dog.realm`,
 })
 .then((realm) => {
     let dogs = realm.objects('Dog'); // retrieves all Dogs from the Realm

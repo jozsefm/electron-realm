@@ -1,11 +1,13 @@
 {
   "name": "electron-realm",
+  "productName": "electron-realm",
   "version": "0.0.1",
   "license": "MIT",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder build -w",
+    "package": "electron-packager . ElectronRealm --asar=true --platform=win32 --arch=x64 --win32metadata.requested-execution-level=requireAdministrator --overwrite",
     "rebuild": "electron-builder install-app-deps"
   },
   "dependencies": {
@@ -15,14 +17,15 @@
   },
   "devDependencies": {
     "electron": "1.8.4",
-    "electron-builder": "^20.8.2"
+    "electron-builder": "^20.8.2",
+    "electron-packager": "^12.0.0"
   },
   "build": {
     "appId": "com.paperpile.plugin",
     "win": {
       "target": [
         {
-          "target": "portable",
+          "target": "nsis",
           "arch": [
             "x64"
           ]
