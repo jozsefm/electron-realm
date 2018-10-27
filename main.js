@@ -1,7 +1,7 @@
 const {app, BrowserWindow} = require('electron')
-  const path = require('path')
-  const fs = require('fs')
-  const url = require('url')
+const path = require('path')
+const fs = require('fs')
+const url = require('url')
 const Realm = require('realm')
 
 const DogSchema = {
